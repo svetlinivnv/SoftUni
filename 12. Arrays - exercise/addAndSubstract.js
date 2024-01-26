@@ -1,26 +1,22 @@
 function addAndSubstract(array) {
+  let sumOriginal = 0;
+  let sumModified = 0;
 
-    let sumOriginal = 0;
-    let sumModified = 0;
+  for (i = 0; i < array.length; i++) {
+    currentNumber = array[i];
+    sumOriginal += currentNumber;
 
-    for(i = 0; i < array.length; i++) {
-
-        currentNumber = array[i];
-        sumOriginal += currentNumber;
-
-        if(currentNumber % 2 === 0) {
-            array[i] += i;
-        } else {
-            array[i] -= i;
-        }
-        sumModified += array[i];
+    if (currentNumber % 2 === 0) {
+      array[i] += i;
+    } else {
+      array[i] -= i;
     }
+    sumModified += array[i];
+  }
 
-    console.log(array);
-    console.log(sumOriginal);
-    console.log(sumModified);
-
-
+  console.log(array);
+  console.log(sumOriginal);
+  console.log(sumModified);
 }
 
 addAndSubstract([5, 15, 23, 56, 35]);

@@ -8,11 +8,17 @@ function topIntegers(array) {
       topIntegers.push(currentInteger);
     }
 
+    let isTopInteger = false;
     for (let j = i + 1; j < array.length; j++) {
       if (currentInteger > array[j]) {
-        topIntegers.push(currentInteger);
+        isTopInteger = true;
+      } else {
+        isTopInteger = false;
         break;
-      } else break;
+      }
+    }
+    if (isTopInteger) {
+      topIntegers.push(currentInteger);
     }
   }
 
@@ -21,4 +27,5 @@ function topIntegers(array) {
 
 // topIntegers([14, 24, 3, 19, 15, 17]);
 // topIntegers([1, 4, 3, 2]);
-topIntegers([1, 3, 5, 2, 4]);
+// topIntegers([27, 19, 42, 2, 13, 45, 48]);
+// topIntegers([41, 41, 34, 20]);

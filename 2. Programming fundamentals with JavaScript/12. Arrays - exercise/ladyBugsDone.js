@@ -65,7 +65,13 @@ function ladyBugs(arr) {
 	console.log(ladybugsArray.join(' '));
  
 }
-ladyBugs(	[ 5, '3',
-	'3 left 2',
-	'1 left -2']
-);
+// ladyBugs(	[ 5, '3',
+// 	'3 left 2',
+// 	'1 left -2']
+// );
+
+
+ladyBugs([6, '1 3 5',
+    '1 left 2',
+    '3 right 2',
+    '5 left 3']);

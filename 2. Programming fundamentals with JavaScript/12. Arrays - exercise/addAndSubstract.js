@@ -2,8 +2,8 @@ function addAndSubstract(array) {
   let sumOriginal = 0;
   let sumModified = 0;
 
-  for (i = 0; i < array.length; i++) {
-    currentNumber = array[i];
+  for (let i = 0; i < array.length; i++) {
+    let currentNumber = array[i];
     sumOriginal += currentNumber;
 
     if (currentNumber % 2 === 0) {

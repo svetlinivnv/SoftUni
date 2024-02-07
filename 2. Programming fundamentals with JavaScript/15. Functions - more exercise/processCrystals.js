@@ -2,7 +2,6 @@ function processCrystals(input) {
     const targetThickness = input[0];
     let currentThickness = 0;
 
-
     let cut = () => currentThickness / 4;
     let lap = () => currentThickness * 0.8;
     let grind = () => currentThickness - 20;
@@ -18,7 +17,7 @@ function processCrystals(input) {
         let usedXray = false;
         currentThickness = input[i];
         console.log(`Processing chunk ${currentThickness} microns`);
-        while (currentThickness > targetThickness) {
+        while (currentThickness !== targetThickness) {
             if (cut() >= targetThickness) {
                 currentThickness = cut(); cutCount++;
             } else if (lap() >= targetThickness) {
@@ -30,9 +29,7 @@ function processCrystals(input) {
             } else if (xray() >= targetThickness && usedXray === false) {
                 currentThickness = xray(); usedXray = true;
             }
-
             currentThickness = tranWash();
-
         }
 
         if (cutCount > 0) { console.log(`Cut x${cutCount}\nTransporting and washing`); }

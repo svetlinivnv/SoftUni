@@ -3,20 +3,20 @@ function arrayManipulations(array) {
     let arrayToManipulate = array.shift().split(' ').map(Number);
 
     for (let current of array) {
-        let [command, ...args] = current.split(' ');
-        args = args.map(Number);
+        let [command, ...workNumArr] = current.split(' ');
+        workNumArr = workNumArr.map(Number);
         switch (command) {
             case 'Add':
-                arrayToManipulate.push(args[0]);
+                arrayToManipulate.push(workNumArr[0]);
                 break;
             case 'Remove':
-                arrayToManipulate = arrayToManipulate.filter(num => num !== args[0]);
+                arrayToManipulate = arrayToManipulate.filter(num => num !== workNumArr[0]);
                 break;
             case 'RemoveAt':
-                arrayToManipulate.splice(args[0], 1);
+                arrayToManipulate.splice(workNumArr[0], 1);
                 break;
             case 'Insert':
-                arrayToManipulate.splice(args[1], 0, args[0]);
+                arrayToManipulate.splice(workNumArr[1], 0, workNumArr[0]);
                 break;
         }
     }

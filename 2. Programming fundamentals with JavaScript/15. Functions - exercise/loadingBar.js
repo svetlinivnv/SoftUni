@@ -21,4 +21,4 @@ function loadingBar(percent) {
 
 }
 
-loadingBar(100);
+loadingBar(80);

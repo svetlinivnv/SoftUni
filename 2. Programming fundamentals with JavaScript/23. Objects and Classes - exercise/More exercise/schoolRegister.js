@@ -1,6 +1,5 @@
 function schoolRegister(input) {
     let students = [];
-    let avgScore = 0;
     let numberOfStudents = 0;
 
     for (let currentStudent of input) {
@@ -10,7 +9,6 @@ function schoolRegister(input) {
         const score = Number(studentArr[2].split(" ").pop());
         let student = { name: name, grade: grade, score: score };
         if (score >= 3) {
-            avgScore += score;
             numberOfStudents++;
             students.push(student);
         }
@@ -25,10 +23,14 @@ function schoolRegister(input) {
         studentsByGrade[student.grade].push(student);
     }
 
+    let avgScore = 0;
     for (let grade in studentsByGrade) {
         let studentsString = studentsByGrade[grade].map(student => student.name).join(", ");
-        let avgScore = studentsByGrade[grade].reduce((total, student) => total + student.score, 0) / studentsByGrade[grade].length;
-        console.log(`${grade} Grade\nList of students: ${studentsString}\nAverage annual score from last year: ${avgScore.toFixed(2)}\n`);
+        for (let current of studentsByGrade[grade]) {
+            avgScore += current.score;
+        }
+        console.log(`${grade} Grade\nList of students: ${studentsString}\nAverage annual score from last year: ${(avgScore / studentsByGrade[grade].length).toFixed(2)}\n`);
+        avgScore = 0;
     }
 }
 

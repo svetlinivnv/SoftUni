@@ -8,7 +8,7 @@ function flightSchedule(input) {
     for (let current of flights) {
         let [number, ...destination] = current.split(' ');
         destination = destination.join(' ');
-        let flightObj = { number: number, destination: destination, status: 'Ready to fly'};
+        let flightObj = { number: number, destination: destination, status: 'Ready to fly' };
         for (let current of statusChanges) {
             let [numberTochange, statusToSet] = current.split(' ');
             if (number === numberTochange) {

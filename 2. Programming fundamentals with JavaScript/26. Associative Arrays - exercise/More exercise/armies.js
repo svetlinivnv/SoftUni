@@ -1,24 +1,24 @@
 function armies(input) {
 
-    let leadersArmies = {};
+    const leadersArmies = {};
 
     input.forEach((element) => {
         if (element.includes("arrives")) {
-            let leader = element.split("arrives").join(" ").trim();
+            const leader = element.split("arrives").join(" ").trim();
             leadersArmies[leader] = {};
         } else if (element.includes("defeated")) {
-            let defeated = element.split("defeated").join(" ").trim();
+            const defeated = element.split("defeated").join(" ").trim();
             if (defeated in leadersArmies) {
                 delete leadersArmies[defeated];
             }
         } else if (element.includes(":")) {
-            let [leaderName, rest] = element.split(": ");
-            let [armyName, armyCount] = rest.split(", ");
+            const [leaderName, rest] = element.split(": ");
+            const [armyName, armyCount] = rest.split(", ");
             if (leaderName in leadersArmies) {
                 leadersArmies[leaderName][armyName] = +armyCount;
             }
         } else if (element.includes("+")) {
-            let [armyName, addCount] = element.split(" + ");
+            const [armyName, addCount] = element.split(" + ");
             for (current in leadersArmies) {
                 if (armyName in leadersArmies[current]) {
                     leadersArmies[current][armyName] += +addCount;
@@ -26,21 +26,20 @@ function armies(input) {
             }
         }
     });
-    let leaderTotals = {};
-    for (let leader in leadersArmies) {
+    const leaderTotals = {};
+    for (const leader in leadersArmies) {
         let tempTotal = 0;
-        for (let army in leadersArmies[leader]) {
+        for (const army in leadersArmies[leader]) {
             tempTotal += leadersArmies[leader][army];
         }
         leaderTotals[leader] = tempTotal;
         tempTotal = 0;
     }
-    let sortedLeaders = Object.entries(leaderTotals).sort((a, b) => b[1] - a[1]);
+    const sortDesc = (objectToSort) => Object.entries(objectToSort).sort((a, b) => b[1] - a[1]);
+    const sortedLeaders = sortDesc(leaderTotals);
     sortedLeaders.forEach((leader) => {
         console.log(`${leader[0]}: ${leader[1]}`);
-        let sortedArmies = Object.entries(leadersArmies[leader[0]]).sort(
-            (a, b) => b[1] - a[1]
-        );
+        const sortedArmies = sortDesc(leadersArmies[leader[0]]);
         sortedArmies.forEach(([army, count]) => {
             console.log(`>>> ${army} - ${count}`);
         });

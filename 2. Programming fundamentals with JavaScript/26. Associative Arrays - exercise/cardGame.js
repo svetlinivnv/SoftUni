@@ -1,58 +1,57 @@
-function cardGame(input) {
-
-    let playerWithDeck = {};
-    let cardsMapper = {
-        p: {
-            "J": 11,
-            "Q": 12,
-            "K": 13,
-            "A": 14,
-        },
-        t: {
-            "S": 4,
-            "H": 3,
-            "D": 2,
-            "C": 1,
+function cardGame (input) {
+    let hands = {};
+    for (let line of input) {
+        let [name, cards] = line.split(": ");
+        if (hands.hasOwnProperty(name)){
+            cards = cards.split(", ");
+            for (let card of cards) {
+                hands[name].push(card);
+            }
+        } else {
+            cards = cards.split(", ");
+            hands[name] = cards;
         }
     }
-
-    input.forEach(deck => {
-        let [player, currDeck] = deck.split(': ');
-        if (!playerWithDeck[player]) {
-            playerWithDeck[player] = new Set(currDeck.split(', '));
-        } else {
-            currDeck.split(', ').forEach((card) => {
-                playerWithDeck[player].add(card);
-            });
-        }
-    });
-    Object.keys(playerWithDeck).forEach(key => {
-        console.log(`${key}: ${totalPower(playerWithDeck[key])}`);
-    });
-
-    function totalPower(cardSet) {
-        let totalSum = 0;
-
-        cardSet.forEach((card) => {
-            let tokens = card.split("");
-            let color = tokens.pop();
-            let value = tokens.join('');
-
-            let p = 0;
-
-            if (!cardsMapper.p[value]) {
-                p = Number(value);
+    for (let person in hands) {
+        let set = new Set(hands[person]);
+        let sett = Array.from(set);
+        let sum = 0;
+        for (let i = 0; i < sett.length; i++) {
+            let size = sett[i].length;
+            let p;
+            let t;
+            if (size == 2) {
+                [p, t] = sett[i].split("");
             } else {
-                p = cardsMapper.p[value];
+                p = sett[i].substring(0, 2);
+                t = sett[i].substring(2);
             }
-
-            totalSum += p * (cardsMapper.t[color]);
-
-        })
-        return totalSum;
+            switch(p) {
+                case "2": p = 2; break;
+                case "3": p = 3; break;
+                case "4": p = 4; break;
+                case "5": p = 5; break;
+                case "6": p = 6; break;
+                case "7": p = 7; break;
+                case "8": p = 8; break;
+                case "9": p = 9; break;
+                case "10": p = 10; break;
+                case "J": p = 11; break;
+                case "Q": p = 12; break;
+                case "K": p = 13; break;
+                case "A": p = 14; break;
+            }
+            switch(t) {
+                case "S": t = 4; break;
+                case "H": t = 3; break;
+                case "D": t = 2; break;
+                case "C": t = 1; break;
+            }
+            sum += p * t;
+        }
+        console.log(`${person}: ${sum}`);
     }
 }
-
 
 cardGame([
     'Peter: 2C, 4H, 9H, AS, QS',

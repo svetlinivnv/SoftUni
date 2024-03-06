@@ -2,29 +2,29 @@ function armies(input) {
 
     let leadersArmies = {};
 
-    input.forEach(element => {
-        if (element.includes('arrives')) {
-            let [leader] = element.split(' ');
+    input.forEach((element) => {
+        if (element.includes("arrives")) {
+            let leader = element.split("arrives").join(" ").trim();
             leadersArmies[leader] = {};
-        } else if (element.includes('defeated')) {
-            let [defeated] = element.split(' ');
+        } else if (element.includes("defeated")) {
+            let defeated = element.split("defeated").join(" ").trim();
             if (defeated in leadersArmies) {
-            delete leadersArmies[defeated];
+                delete leadersArmies[defeated];
             }
-        } else if (element.includes(':')) {
-            let [leaderName, rest] = element.split(': ');
-            let [armyName, armyCount] = rest.split(', ');
+        } else if (element.includes(":")) {
+            let [leaderName, rest] = element.split(": ");
+            let [armyName, armyCount] = rest.split(", ");
             if (leaderName in leadersArmies) {
-            leadersArmies[leaderName][armyName] = +armyCount;
+                leadersArmies[leaderName][armyName] = +armyCount;
             }
-        } else if (element.includes('+')) {
-            let [armyName, addCount] = element.split(' + ');
+        } else if (element.includes("+")) {
+            let [armyName, addCount] = element.split(" + ");
             for (current in leadersArmies) {
                 if (armyName in leadersArmies[current]) {
                     leadersArmies[current][armyName] += +addCount;
                 }
             }
-        };
+        }
     });
     let leaderTotals = {};
     for (let leader in leadersArmies) {
@@ -36,41 +36,38 @@ function armies(input) {
         tempTotal = 0;
     }
     let sortedLeaders = Object.entries(leaderTotals).sort((a, b) => b[1] - a[1]);
-    sortedLeaders.forEach(leader => {
+    sortedLeaders.forEach((leader) => {
         console.log(`${leader[0]}: ${leader[1]}`);
-        for (let army in leadersArmies[leader[0]]) {
-            console.log(`>>> ${army} - ${leadersArmies[leader[0]][army]}`);
-        }
+        let sortedArmies = Object.entries(leadersArmies[leader[0]]).sort(
+            (a, b) => b[1] - a[1]
+        );
+        sortedArmies.forEach(([army, count]) => {
+            console.log(`>>> ${army} - ${count}`);
+        });
     });
 }
 
-// armies(['Rick Burr arrives', 
-//         'Fergus: Wexamp, 30245', 
-//         'Rick Burr: Juard, 50000', 
-//         'Findlay arrives', 
-//         'Findlay: Britox, 34540', 
+// armies(['Rick Burr arrives',
+//         'Fergus: Wexamp, 30245',
+//         'Rick Burr: Juard, 50000',
+//         'Findlay arrives',
+//         'Findlay: Britox, 34540',
 //         'Wexamp + 6000',
-//         'Juard + 1350', 
+//         'Juard + 1350',
 //         'Britox + 4500',
-//         'Porter arrives', 
+//         'Porter arrives',
 //         'Porter: Legion, 55000',
-//         'Legion + 302', 
+//         'Legion + 302',
 //         'Rick Burr defeated',
 //         'Porter: Retix, 3205']);
 
-armies(['Rick Burr arrives', 
-        'Findlay arrives', 
-        'Rick Burr: Juard, 1500',
-        'Wexamp arrives', 
-        'Findlay: Wexamp, 34540',
-        'Wexamp + 340',
-        'Wexamp: Britox, 1155', 
-        'Wexamp: Juard, 43423']);
-
-
-// const sortedLeaders = Object.entries(leadersArmies)
-//     .sort(([, a], [, b]) => 
-//         Object.values(b).reduce((acc, count) => acc + count, 0) -
-//         Object.values(a).reduce((acc, count) => acc + count, 0)
-//     )
-//     .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+armies([
+    "Rick Burr arrives",
+    "Findlay arrives",
+    "Rick Burr: Juard, 1500",
+    "Wexamp arrives",
+    "Findlay: Wexamp, 34540",
+    "Wexamp + 340",
+    "Wexamp: Britox, 1155",
+    "Wexamp: Juard, 43423",
+]);

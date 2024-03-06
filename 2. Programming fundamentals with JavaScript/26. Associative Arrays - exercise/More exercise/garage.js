@@ -14,8 +14,8 @@ function garage (input) {
     for (let current in garages) {
         console.log(`Garage № ${current}`);
         garages[current].forEach(car => {
-            carFormetted = car.split(': ').join(' - ');
-            console.log(`--- ${carFormetted}`);
+            carFormatted = car.split(': ').join(' - ');
+            console.log(`--- ${carFormatted}`);
         });
     }
 }

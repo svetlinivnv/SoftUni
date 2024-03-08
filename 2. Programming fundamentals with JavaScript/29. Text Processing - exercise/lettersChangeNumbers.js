@@ -4,24 +4,17 @@ function lettersChangeNumbers(input) {
     let result = 0;
 
     for (let current of arrOfInputs) {
-        let firstLetter = current[0];
-        let lastLetter = current[current.length - 1];
-        let number = Number(current.substring(1, current.length - 1));
+        let firstLetter = current[0], lastLetter = current[current.length - 1], number = Number(current.substring(1, current.length - 1));
         let alphabetPositionFirst = firstLetter.toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0) + 1;
         let alphabetPositionLast = lastLetter.toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0) + 1;
 
         if (firstLetter !== firstLetter.toLowerCase()) {
             number /= alphabetPositionFirst;
-        } else {
-            number *= alphabetPositionFirst;
-        }
+        } else number *= alphabetPositionFirst;
 
         if (lastLetter !== lastLetter.toLowerCase()) {
             number -= alphabetPositionLast;
-        } else {
-            number += alphabetPositionLast;
-        }
-
+        } else number += alphabetPositionLast;
         result += number
     }
     console.log(result.toFixed(2));

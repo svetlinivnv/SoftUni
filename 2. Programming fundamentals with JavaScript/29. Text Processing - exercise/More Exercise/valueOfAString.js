@@ -8,9 +8,8 @@ function valueOfAString(input) {
     for (let i = 0; i < string.length; i++) {
         let currLetter = string[i];
         let asciiValue = currLetter.charCodeAt();
-
+        
         if ((asciiValue >= 65 && asciiValue <= 90) || (asciiValue >= 97 && asciiValue <= 122)) {
-
             if (currLetter === currLetter.toLowerCase()) {
                 lowerSum += asciiValue;
             } else upperSum += asciiValue;

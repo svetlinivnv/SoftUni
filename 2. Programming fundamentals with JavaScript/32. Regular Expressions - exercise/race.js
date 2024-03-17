@@ -5,18 +5,14 @@ function race(input) {
     let participants = input.shift().split(', ');
 
     for (let currentParticipant of input) {
-        if (currentParticipant === 'end of race') {
-            break;
-        } else {
-            let name = currentParticipant.replace(patternName, '');
-            if (participants.includes(name)) {
-                let digits = currentParticipant.replace(patternDigits, '').split('').map(Number);
-                let sum = digits.reduce((sum, currentDigit) => sum + currentDigit, 0);
-                if (!resultObj.hasOwnProperty(name)) {
-                    resultObj[name] = sum;
-                } else {
-                    resultObj[name] += sum;
-                }
+        let name = currentParticipant.replace(patternName, '');
+        if (participants.includes(name)) {
+            let digits = currentParticipant.replace(patternDigits, '').split('').map(Number);
+            let sum = digits.reduce((sum, currentDigit) => sum + currentDigit, 0);
+            if (!resultObj.hasOwnProperty(name)) {
+                resultObj[name] = sum;
+            } else {
+                resultObj[name] += sum;
             }
         }
     }

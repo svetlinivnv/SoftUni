@@ -18,7 +18,7 @@ function starEnigma(list) {
             finalMessage = decryptedMsg.join('')
         }
         let destructuredMsg = elementsRegex.exec(finalMessage);
-        if (destructuredMsg != null) {
+        if (destructuredMsg !== null) {
             let { planet, type } = destructuredMsg.groups;
             type === 'A' ? attackedPlanets.push(planet) : destroyedPlanets.push(planet);
         }

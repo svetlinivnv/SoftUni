@@ -1,5 +1,5 @@
 function starEnigma(list) {
-    const msgCount = list.shift();
+    list.shift();
     const lettersRegex = /s|t|a|r|S|T|A|R/g;
     const elementsRegex = /@(?<planet>[A-Za-z]+)[^@\-!>:]*:(?<population>[0-9]+)[^@\-!>:]*!(?<type>[AD])![^@\-!>:]*->(?<soldiers>[0-9]+)/;
     let attackedPlanets = [];
@@ -22,14 +22,9 @@ function starEnigma(list) {
         let destructuredMsg = elementsRegex.exec(finalMessage);
         if (destructuredMsg != null) {
             let { planet, type } = destructuredMsg.groups;
-            if (type === 'A') {
-                attackedPlanets.push(planet)
-            } else if (type === 'D') {
-                destroyedPlanets.push(planet);
-            }
+            type === 'A' ? attackedPlanets.push(planet) : destroyedPlanets.push(planet);
         }
     }
-
     let attackedPlanetsSorted = attackedPlanets.sort((a, b) => a.localeCompare(b));
     let destroyedPlanetsSorted = destroyedPlanets.sort((a, b) => a.localeCompare(b));
     console.log(`Attacked planets: ${attackedPlanetsSorted.length}`);

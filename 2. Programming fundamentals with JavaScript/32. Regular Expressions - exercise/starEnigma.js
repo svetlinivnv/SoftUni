@@ -10,12 +10,10 @@ function starEnigma(list) {
         if (elementsRegex.test(message)) {
             finalMessage = message;
         } else {
-            let deduct = message.match(lettersRegex) && message.match(lettersRegex).length;
-            let msgArr = message.split('');
             let decryptedMsg = [];
-            msgArr.forEach(symbol => {
-                let decryptedSymbolCode = symbol.charCodeAt(0) - deduct;
-                decryptedMsg.push(String.fromCharCode(decryptedSymbolCode));
+            let deduct = message.match(lettersRegex) && message.match(lettersRegex).length;
+            message.split('').forEach(symbol => {
+                decryptedMsg.push(String.fromCharCode(symbol.charCodeAt(0) - deduct));
             });
             finalMessage = decryptedMsg.join('')
         }

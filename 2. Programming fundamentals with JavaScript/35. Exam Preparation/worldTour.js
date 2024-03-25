@@ -28,8 +28,7 @@ function worldTour(input) {
             console.log(string);
         } else {
             console.log(`Ready for world tour! Planned stops: ${string}`);
-
-        }        
+        }
     }
 }
 

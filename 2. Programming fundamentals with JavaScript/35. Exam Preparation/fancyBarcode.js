@@ -9,9 +9,7 @@ function fancyBarcode(input) {
             let digits = barcode.match(digitsPattern);
             if (digits !== null) {
                 productGroup = digits.join("");
-            } else {
-                productGroup = "00";
-            }
+            } else productGroup = "00";
             console.log(`Product group: ${productGroup}`);
         } else console.log("Invalid barcode");
     }

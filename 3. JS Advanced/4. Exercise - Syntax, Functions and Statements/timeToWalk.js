@@ -9,11 +9,7 @@ function timeToWalk (steps, meterPerStep, speedInKmh) {
     let minutes = (hours - Math.floor(hours)) * 60;
     let seconds = (minutes - Math.floor(minutes)) * 60;
 
-    let hoursToDestination = String(Math.floor(hours)).padStart(2, '0');
-    let minutesToDestination = String(Math.floor(minutes)).padStart(2, '0');
-    let secondsToDestination = String(Math.ceil(seconds)).padStart(2, '0');
-
-    console.log(`${hoursToDestination}:${minutesToDestination}:${secondsToDestination}`);
+    console.log(`${String(Math.floor(hours)).padStart(2, '0')}:${String(Math.floor(minutes)).padStart(2, '0')}:${String(Math.ceil(seconds)).padStart(2, '0')}`);
 }
 
 timeToWalk(4000, 0.60, 5);

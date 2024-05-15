@@ -6,11 +6,7 @@ function previousDay(year, month, day) {
     let outputMonth = date.getMonth() + 1;
     let outputDay = date.getDate();
 
-    console.log(date);
     console.log(`${outputYear}-${outputMonth}-${outputDay}`);
-
-
-
 
 }
 

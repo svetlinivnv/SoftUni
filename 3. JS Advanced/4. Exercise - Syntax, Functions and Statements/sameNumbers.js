@@ -4,6 +4,7 @@ function sameNumbers(number) {
     let numberAsString = String(number);
     let numberArr = [];
     let areSame = true;
+
     for (let i = 0; i < numberAsString.length; i++) {
         let currDigit = Number(numberAsString[i]);
         sumOfDigits += currDigit;
@@ -15,7 +16,7 @@ function sameNumbers(number) {
             break;
         }
     }
-    
+
     if (areSame) {
         console.log('true');
     } else {

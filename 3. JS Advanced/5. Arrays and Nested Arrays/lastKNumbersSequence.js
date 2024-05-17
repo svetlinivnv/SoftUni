@@ -1,18 +1,20 @@
 function lastKNumbersSequence(lengthOfArr, previousElements) {
 
-    let resultArr = [1];
-    let arrLength = lengthOfArr.length - 1;
-    console.log(lengthOfArr.length);
+    let result = [1];
 
-    for (let i = 0; i < arrLength.length - 1; i++) {
-
-        // let tempN = resultArr[]
-
-
-
-
+    for (let i = 0; i < lengthOfArr - 1; i++) {
+        let previous = previousElements;
+        if (result.length < previousElements) {
+            previous = result.length;
+        }
+        let nextElement = 0;
+        for (let j = result.length - previous; j < result.length; j++) {
+            nextElement += result[j];
+        }
+        result.push(nextElement);
     }
-
+    return result;
 }
 
 lastKNumbersSequence(6, 3);
+lastKNumbersSequence(8, 2);

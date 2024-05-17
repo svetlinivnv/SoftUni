@@ -16,5 +16,4 @@ function lastKNumbersSequence(lengthOfArr, previousElements) {
     return result;
 }
 
-lastKNumbersSequence(6, 3);
-lastKNumbersSequence(8, 2);
+console.log(lastKNumbersSequence(6, 3));

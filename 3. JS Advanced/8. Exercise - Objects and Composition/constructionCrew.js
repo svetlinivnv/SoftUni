@@ -1,6 +1,6 @@
 function constructionCrew(worker) {
 
-    if (worker.dizziness === true) {
+    if (worker.dizziness) {
         worker['levelOfHydrated'] += 0.1 * worker.experience * worker.weight;
         worker['dizziness'] = false;
     }

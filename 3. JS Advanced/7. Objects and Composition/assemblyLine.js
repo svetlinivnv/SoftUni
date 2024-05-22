@@ -36,7 +36,6 @@ function createAssemblyLine() {
     return library;
 }
 
-// Usage remains the same
 const assemblyLine = createAssemblyLine();
 const myCar = {
     make: 'Toyota',
@@ -44,10 +43,10 @@ const myCar = {
 };
 
 assemblyLine.hasClima(myCar);
-console.log(myCar.temp); // 21
+console.log(myCar.temp);
 myCar.tempSettings = 18;
 myCar.adjustTemp();
-console.log(myCar.temp); // 20
+console.log(myCar.temp);
 
 assemblyLine.hasAudio(myCar);
 myCar.currentTrack = {

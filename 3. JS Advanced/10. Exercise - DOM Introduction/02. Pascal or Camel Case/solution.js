@@ -1,21 +1,22 @@
 function solve() {
     let input = document.getElementById('text').value;
     let convention = document.getElementById('naming-convention').value;
+    let result = document.getElementById('result');
 
     let wordsArr = input.split(' ').map((word) => word.toLowerCase());
-    let result = [];
+    let resultArr = [];
     
     function camelCase() {
         for (let i = 0; i < wordsArr.length; i++) {
             let wordAsArr = wordsArr[i].split('');
             if (i === 0) {
-                result.push(wordAsArr.join(''));
+                resultArr.push(wordAsArr.join(''));
             } else {
                 wordAsArr[0] = wordAsArr[0].toUpperCase();
-                result.push(wordAsArr.join(''));
+                resultArr.push(wordAsArr.join(''));
             }
         }
-        let returnValue = result.join('');
+        let returnValue = resultArr.join('');
         return (returnValue);
     }
     
@@ -23,9 +24,9 @@ function solve() {
         for (let word of wordsArr) {
             let wordAsArr = word.split('');
             wordAsArr[0] = wordAsArr[0].toUpperCase();
-            result.push(wordAsArr.join(''));
+            resultArr.push(wordAsArr.join(''));
         }
-        let returnValue = result.join('');
+        let returnValue = resultArr.join('');
         return (returnValue);
     }
     
@@ -36,5 +37,5 @@ function solve() {
         output = pascalCase();
     }
     
-    document.getElementById('result').textContent = output;
+    result.textContent = output;
 }

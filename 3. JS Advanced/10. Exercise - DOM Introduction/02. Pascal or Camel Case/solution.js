@@ -2,7 +2,6 @@ function solve() {
     let input = document.getElementById('text').value;
     let convention = document.getElementById('naming-convention').value;
 
-    
     let wordsArr = input.split(' ').map((word) => word.toLowerCase());
     let result = [];
     

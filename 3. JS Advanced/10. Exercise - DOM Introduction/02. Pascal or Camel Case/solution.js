@@ -4,37 +4,32 @@ function solve() {
 
     let wordsArr = input.split(' ').map((word) => word.toLowerCase());
     let result = [];
-    
+
     function camelCase() {
         for (let i = 0; i < wordsArr.length; i++) {
-            let wordAsArr = wordsArr[i].split('');
-            if (i === 0) {
-                result.push(wordAsArr.join(''));
-            } else {
-                wordAsArr[0] = wordAsArr[0].toUpperCase();
-                result.push(wordAsArr.join(''));
-            }
+            let word = wordsArr[i];
+            if (i > 0) {
+                let formattedWord = word.charAt(0).toUpperCase() + word.slice(1);
+                result.push(formattedWord);
+            } else result.push(word);
         }
-        let returnValue = result.join('');
-        return (returnValue);
+        return (result.join(''));
     }
-    
+
     function pascalCase() {
         for (let word of wordsArr) {
-            let wordAsArr = word.split('');
-            wordAsArr[0] = wordAsArr[0].toUpperCase();
-            result.push(wordAsArr.join(''));
+            let formattedWord = word.charAt(0).toUpperCase() + word.slice(1);
+            result.push(formattedWord);
         }
-        let returnValue = result.join('');
-        return (returnValue);
+        return (result.join(''));
     }
-    
+
     let output = 'Error!';
     if (convention === 'Camel Case') {
         output = camelCase();
     } else if (convention === 'Pascal Case') {
         output = pascalCase();
     }
-    
+
     document.getElementById('result').textContent = output;
 }

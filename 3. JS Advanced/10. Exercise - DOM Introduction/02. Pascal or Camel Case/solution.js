@@ -15,7 +15,7 @@ function solve() {
         }
         return (result.join(''));
     }
-
+    
     function pascalCase() {
         for (let word of wordsArr) {
             let formattedWord = word.charAt(0).toUpperCase() + word.slice(1);

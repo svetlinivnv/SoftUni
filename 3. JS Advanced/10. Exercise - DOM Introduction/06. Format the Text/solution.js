@@ -1,11 +1,9 @@
 function solve() {
     let textInput = document.getElementById('input').value;
-    let outputElement = document.getElementById('output');
-    outputElement.innerHTML = '';
-
     let splittedInput = textInput.split('.')
     splittedInput = splittedInput.map((sentence) => sentence += '.');
-
+    let outputElement = document.getElementById('output');
+    outputElement.innerHTML = '';
 
     let paragraphAcc = '';
     let sentenceCounter = 0;

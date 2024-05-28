@@ -1,20 +1,28 @@
-function fromJsonToHtml(json) {
+function fromJSONtoHTMLTable(input) {
+    const arrOfObj = JSON.parse(input);
 
-    let arr = JSON.parse(json);
-    let outputArr = ['<table>'];
-    outputArr.push(makeKeyRow(arr));
-    arr.forEach(obj => outputArr.push(makeValueRow(obj)));
-    outputArr.push('</table>');
+    let result = '<table>\n';
 
-    
+    result += '\t<tr>';
+    Object.keys(arrOfObj[0]).forEach(n => result += `<th>${escapeHtml(n)}</th>`);
+    result += '</tr>\n';
 
+    for (const obj of arrOfObj) {
+        result += '\t<tr>';
+        Object.values(obj).forEach(e => result += `<td>${escapeHtml(e)}</td>`);
+        result += '</tr>\n';
+    }
 
-    console.log(arr);
-    let myJson = JSON.stringify(arr, null, 2);
-    console.log(myJson);
+    result += '</table>';
 
-
+    function escapeHtml(str) {
+        return str
+            .toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+    return result;
 }
-
-fromJsonToHtml(`[{"Name":"Stamat", "Score":5.5},
-                 {"Name":"Rumen", "Score":6}]`);

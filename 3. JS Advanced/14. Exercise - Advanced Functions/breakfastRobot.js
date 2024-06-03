@@ -19,6 +19,7 @@ function solution(input) {
             stock[microElement] += Number(quantity);
             return `Success`;
         },
+
         prepare: function (recipe, quantity) {
             const meal = recipeLibrary[recipe];
             let isEnough = true;
@@ -36,6 +37,7 @@ function solution(input) {
                 return 'Success';
             }
         },
+
         report: function () {
             return `protein=${stock['protein']} carbohydrate=${stock['carbohydrate']} fat=${stock['fat']} flavour=${stock['flavour']}`;
         }
@@ -56,7 +58,6 @@ function solution(input) {
 }
 
 let manager = solution();
-
 
 console.log(manager("prepare turkey 1"));
 console.log(manager("restock protein 10"));

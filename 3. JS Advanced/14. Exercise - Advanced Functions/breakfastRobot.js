@@ -1,4 +1,4 @@
-function solution(input) {
+function solution() {
     let stock = {
         protein: 0,
         carbohydrate: 0,
@@ -30,6 +30,7 @@ function solution(input) {
                     return `Error: not enough ${ingredient} in stock`;
                 }
             }
+
             if (isEnough) {
                 for (let ingredient in meal) {
                     stock[ingredient] -= meal[ingredient] * quantity;
@@ -38,14 +39,11 @@ function solution(input) {
             }
         },
 
-        report: function () {
-            return `protein=${stock['protein']} carbohydrate=${stock['carbohydrate']} fat=${stock['fat']} flavour=${stock['flavour']}`;
-        }
+        report: () => `protein=${stock['protein']} carbohydrate=${stock['carbohydrate']} fat=${stock['fat']} flavour=${stock['flavour']}`
     }
 
     return function (input) {
         let [command, item, quantity] = input.split(' ');
-        quantity = Number(quantity);
 
         if (command === 'restock') {
             return commands.restock(item, quantity);
@@ -68,7 +66,7 @@ console.log(manager("restock fat 10"));
 console.log(manager("prepare turkey 1"));
 console.log(manager("restock flavour 10"));
 console.log(manager("prepare turkey 1"));
-console.log(manager("report")); 
+console.log(manager("report"));
 
 // manager('restock flavour 50')
 // manager('prepare lemonade 4')

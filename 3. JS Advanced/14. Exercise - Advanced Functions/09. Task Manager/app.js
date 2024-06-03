@@ -8,6 +8,13 @@ function solve() {
     const inProgressEl = document.querySelector('section:nth-of-type(3) div:nth-of-type(2)');
     const completeEl = document.querySelector('section:nth-of-type(4) div:nth-of-type(2)');
 
+    function clearInputs () {
+        taskEl.value = '';
+        descriptionEl.value = '';
+        dueDateEl.value = '';
+        taskEl.focus();
+    }
+
     addBtnEl.addEventListener('click', createTask);
 
     function createTask(event) {
@@ -33,6 +40,7 @@ function solve() {
             divContainer.append(btn2);
             articleEl.append(divContainer);
             openEl.appendChild(articleEl);
+            clearInputs();
         }
     }
 

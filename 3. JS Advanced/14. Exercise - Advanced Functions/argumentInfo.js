@@ -1,7 +1,5 @@
 function argumentInfo(...array) {
-
     const typeWithOccurences = {};
-
 
     for (const argument of array) {
         const argType = typeof argument;

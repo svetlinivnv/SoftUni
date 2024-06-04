@@ -8,7 +8,7 @@ function solve() {
     const inProgressEl = document.querySelector('section:nth-of-type(3) div:nth-of-type(2)');
     const completeEl = document.querySelector('section:nth-of-type(4) div:nth-of-type(2)');
 
-    function clearInputs () {
+    function clearInputs() {
         taskEl.value = '';
         descriptionEl.value = '';
         dueDateEl.value = '';
@@ -66,7 +66,9 @@ function solve() {
 
     function finishTask(event) {
         let container = event.target.parentElement;
-        container.innerHTML = "";
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
         let elToMove = container.parentElement;
         elToMove.querySelector('div').remove();
         completeEl.append(elToMove);

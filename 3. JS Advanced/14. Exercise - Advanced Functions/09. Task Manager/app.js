@@ -22,24 +22,19 @@ function solve() {
         if (taskEl.value && descriptionEl.value && dueDateEl.value) {
             let articleEl = document.createElement('article');
             let h3El = document.createElement('h3');
-            h3El.textContent = taskEl.value;
-            articleEl.append(h3El);
             let p1El = document.createElement('p');
-            p1El.textContent = `Description: ${descriptionEl.value}`;
-            articleEl.append(p1El);
             let p2El = document.createElement('p');
-            p2El.textContent = `Due Date: ${dueDateEl.value}`;
-            articleEl.append(p2El);
-
             let divContainer = document.createElement('div');
             divContainer.classList.add("flex");
-
+            h3El.textContent = taskEl.value;
+            p1El.textContent = `Description: ${descriptionEl.value}`;
+            p2El.textContent = `Due Date: ${dueDateEl.value}`;
+            articleEl.append(h3El, p1El, p2El);
             let btn1 = createButton("green", "Start", startTask);
             let btn2 = createButton("red", "Delete", deleteTask);
-            divContainer.append(btn1);
-            divContainer.append(btn2);
+            divContainer.append(btn1, btn2);
             articleEl.append(divContainer);
-            openEl.appendChild(articleEl);
+            openEl.append(articleEl);
             clearInputs();
         }
     }
@@ -57,8 +52,7 @@ function solve() {
         container.innerHTML = "";
         let delBtn = createButton("red", "Delete", deleteTask);
         let finishBtn = createButton("orange", "Finish", finishTask);
-        container.append(delBtn);
-        container.append(finishBtn);
+        container.append(delBtn, finishBtn);
         let elToMove = container.parentElement;
         inProgressEl.append(elToMove);
     }

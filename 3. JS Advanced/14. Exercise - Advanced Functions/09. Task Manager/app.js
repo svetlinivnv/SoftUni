@@ -49,7 +49,9 @@ function solve() {
 
     function startTask(event) {
         let container = event.target.parentElement;
-        container.innerHTML = "";
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
         let delBtn = createButton("red", "Delete", deleteTask);
         let finishBtn = createButton("orange", "Finish", finishTask);
         container.append(delBtn, finishBtn);

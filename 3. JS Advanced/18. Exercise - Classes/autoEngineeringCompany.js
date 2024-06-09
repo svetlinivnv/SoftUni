@@ -1,38 +1,40 @@
-function solution(inputArr = []) {
-    let registry = {};
+function aec(input) {
 
-    for (const info of inputArr) {
-        let [brand, model, quantity] = info.split(" | ");
-        let isModelPresent = false;
+    let catalogue = {};
+
+    input.forEach(data => {
+        let [brand, model, quantity] = data.split(' | ');
+        isModelPresent = false;
         quantity = Number(quantity);
 
-        if (!registry[brand]) {
-            registry[brand] = [];
+        if (!catalogue[brand]) {
+            catalogue[brand] = [];
         }
-        if (registry[brand]) {
-            for (const brand of Object.keys(registry)) {
-                for (const kvp of registry[brand]) {
-                    if (kvp.model == model) {
+
+        if (catalogue[brand]) {
+            for (const brand of Object.keys(catalogue)) {
+                for (const kvp of catalogue[brand]) {
+                    if (kvp.model === model) {
                         kvp.quantity += quantity;
                         isModelPresent = true;
                     }
                 }
             }
-            if (!isModelPresent) {
-                registry[brand].push({ model, quantity })
-            }
+        if (!isModelPresent) {
+            catalogue[brand].push({ model, quantity })
         }
-    }
-    for (const car of Object.keys(registry)) {
+        }
+    });
+    
+    for (const car of Object.keys(catalogue)) {
         console.log(car);
-
-        for (const kvp of registry[car]) {
+        for (const kvp of catalogue[car]) {
             console.log(`###${kvp.model} -> ${kvp.quantity}`);
         }
     }
 }
 
-solution(['Audi | Q7 | 1000',
+aec(['Audi | Q7 | 1000',
     'Audi | Q6 | 100',
     'BMW | X5 | 1000',
     'BMW | X6 | 100',
@@ -41,4 +43,4 @@ solution(['Audi | Q7 | 1000',
     'Lada | Niva | 1000000',
     'Lada | Jigula | 1000000',
     'Citroen | C4 | 22',
-    'Citroen | C5 | 10'])
+    'Citroen | C5 | 10']);

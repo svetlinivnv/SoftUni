@@ -68,6 +68,7 @@ function solution() {
 
             // Save to collection button
             saveBtn.addEventListener('click', () => {
+                console.log(collection.innerHTML);
                 addBtn.disabled = false;
                 previewElement.remove();
                 let collectionItem = `<li>
@@ -83,7 +84,6 @@ function solution() {
                 addBtn.disabled = false;
                 previewElement.remove();
             });
-
         }
     }
     addBtn.addEventListener('click', onClick);

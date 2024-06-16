@@ -1,106 +1,122 @@
 window.addEventListener('load', solve);
 
 function solve() {
-    // Validate input fields
-    function validateInputs() {
-        const carModel = document.getElementById('car-model').value;
-        const carYear = Number(document.getElementById('car-year').value);
-        const partName = document.getElementById('part-name').value;
-        const partNumber = document.getElementById('part-number').value;
-        const condition = document.getElementById('condition').value;
+    const carModelInput = document.getElementById('car-model');
+    const carYearInput = document.getElementById('car-year');
+    const partNameInput = document.getElementById('part-name');
+    const partNumberInput = document.getElementById('part-number');
+    const conditionInput = document.getElementById('condition');
+    const nextBtn = document.getElementById('next-btn');
+    const infoListElement = document.querySelector('.info-list');
+    const confirmListElement = document.querySelector('.confirm-list');
+    const completeImageElement = document.getElementById('complete-img');
+    const completeTextElement = document.getElementById('complete-text');
 
-        return carModel && carYear && partName && partNumber && condition &&
-            carYear >= 1980 && carYear <= 2023;
+    nextBtn.addEventListener('click', nextBtnClickHandler);
+
+    function nextBtnClickHandler(e) {
+        e.preventDefault();
+        const inputs = [
+            carModelInput,
+            carYearInput,
+            partNameInput,
+            partNumberInput,
+            conditionInput,
+        ];
+
+        if (inputs.some(element => element.value === '') || inputs[1].value < 1980 || inputs[1].value > 2023) {
+            return;
+        }
+
+        const infoListContent = createPartInfoElement(carModelInput.value, carYearInput.value, partNameInput.value, partNumberInput.value, conditionInput.value);
+        infoListElement.appendChild(infoListContent);
+        inputs.forEach(input => { input.value = ''; });
+        nextBtn.setAttribute('disabled', 'disabled');
+        completeImageElement.style.visibility = 'hidden';
+        completeTextElement.textContent = '';
+
     }
 
-    // Clear input fields
-    function clearInputs() {
-        document.getElementById('car-model').value = '';
-        document.getElementById('car-year').value = '';
-        document.getElementById('part-name').value = '';
-        document.getElementById('part-number').value = '';
-        document.getElementById('condition').value = '';
+    function createPartInfoElement(carModel, carYear, partName, partNumber, condition) {
+        const carModelElement = document.createElement('p');
+        carModelElement.textContent = `Car Model: ${carModel}`;
+
+        const carYearElement = document.createElement('p');
+        carYearElement.textContent = `Car Year: ${carYear}`;
+
+        const partNameElement = document.createElement('p');
+        partNameElement.textContent = `Part Name: ${partName}`;
+
+        const partNumberElement = document.createElement('p');
+        partNumberElement.textContent = `Part Number: ${partNumber}`;
+
+        const conditionElement = document.createElement('p');
+        conditionElement.textContent = `Condition: ${condition}`;
+
+        const articleElement = document.createElement('article');
+        articleElement.appendChild(carModelElement);
+        articleElement.appendChild(carYearElement);
+        articleElement.appendChild(partNameElement);
+        articleElement.appendChild(partNumberElement);
+        articleElement.appendChild(conditionElement);
+
+        const editButtonElement = document.createElement('button');
+        editButtonElement.classList.add('edit-btn');
+        editButtonElement.textContent = 'Edit';
+
+        const continueButtonElement = document.createElement('button');
+        continueButtonElement.classList.add('continue-btn');
+        continueButtonElement.textContent = 'Continue';
+
+        const liPartContentElement = document.createElement('li');
+        liPartContentElement.classList.add('part-content');
+        liPartContentElement.appendChild(articleElement);
+        liPartContentElement.appendChild(editButtonElement);
+        liPartContentElement.appendChild(continueButtonElement);
+
+        // add event listeners
+        editButtonElement.addEventListener('click', (e) => {
+            carModelInput.value = carModel;
+            carYearInput.value = carYear;
+            partNameInput.value = partName;
+            partNumberInput.value = partNumber;
+            conditionInput.value = condition;
+            editButtonElement.parentElement.remove();
+            nextBtn.removeAttribute('disabled');
+        });
+
+        continueButtonElement.addEventListener('click', (e) => {
+            const confirmListContent = continueButtonElement.parentElement;
+            continueButtonElement.parentElement.remove();
+
+            confirmListContent.querySelector('.edit-btn').remove();
+            confirmListContent.querySelector('.continue-btn').remove();
+
+            const confirmBtnElement = document.createElement('button');
+            confirmBtnElement.classList.add('confirm-btn');
+            confirmBtnElement.textContent = 'Confirm';
+            confirmListContent.appendChild(confirmBtnElement);
+
+            const cancelBtnElement = document.createElement('button');
+            cancelBtnElement.classList.add('cancel-btn');
+            cancelBtnElement.textContent = 'Cancel';
+            confirmListContent.appendChild(cancelBtnElement);
+
+            confirmListElement.appendChild(confirmListContent);
+
+            confirmBtnElement.addEventListener('click', (e) => {
+                e.currentTarget.parentElement.remove();
+                nextBtn.removeAttribute('disabled');
+                completeImageElement.style.visibility = 'visible';
+                completeTextElement.textContent = 'Part is Ordered!';
+            });
+
+            cancelBtnElement.addEventListener('click', (e) => {
+                e.currentTarget.parentElement.remove();
+                nextBtn.removeAttribute('disabled');
+            });
+        });
+
+        return liPartContentElement;
     }
-
-    // Next button click
-    document.getElementById('next-btn').addEventListener('click', function (event) {
-        event.preventDefault();
-        if (validateInputs()) {
-            const dataObj = {
-                carModel: document.getElementById('car-model').value,
-                carYear: document.getElementById('car-year').value,
-                partName: document.getElementById('part-name').value,
-                partNumber: document.getElementById('part-number').value,
-                condition: document.getElementById('condition').value
-            };
-
-            const infoList = document.querySelector('.info-list');
-            const infoListContent = `<li class="part-content">
-                                        <article>
-                                            <p>Car Model: ${dataObj.carModel}</p>
-                                            <p>Car Year: ${dataObj.carYear}</p>
-                                            <p>Part Name: ${dataObj.partName}</p>
-                                            <p>Part Number: ${dataObj.partNumber}</p>
-                                            <p>Condition: ${dataObj.condition}</p>
-                                        </article>
-                                        <button class="edit-btn">Edit</button>
-                                        <button class="continue-btn">Continue</button>
-                                    </li>`;
-            infoList.insertAdjacentHTML('beforeend', infoListContent);
-
-            // Clear inputs and disable Next button
-            clearInputs();
-            document.getElementById('next-btn').disabled = true;
-
-            // Hide complete image and clear the text
-            document.getElementById('complete-img').style.visibility = 'hidden';
-            document.getElementById('complete-text').textContent = '';
-        }
-    });
-
-    // Edit and Continue button clicks
-    document.addEventListener('click', function (event) {
-        if (event.target.className === 'continue-btn') {
-            const listItem = event.target.parentNode;
-            const article = listItem.querySelector('article');
-            const pElements = article.querySelectorAll('p');
-
-            const dataObj = {
-                carModel: pElements[0].textContent.split(': ')[1],
-                carYear: pElements[1].textContent.split(': ')[1],
-                partName: pElements[2].textContent.split(': ')[1],
-                partNumber: pElements[3].textContent.split(': ')[1],
-                condition: pElements[4].textContent.split(': ')[1]
-            };
-
-            const confirmList = document.querySelector('.confirm-list');
-            const confirmListContent = `<li class="part-content">
-                                            <article>
-                                                <p>Car Model: ${dataObj.carModel}</p>
-                                                <p>Car Year: ${dataObj.carYear}</p>
-                                                <p>Part Name: ${dataObj.partName}</p>
-                                                <p>Part Number: ${dataObj.partNumber}</p>
-                                                <p>Condition: ${dataObj.condition}</p>
-                                            </article>
-                                            <button class="confirm-btn">Confirm</button>
-                                            <button class="cancel-btn">Cancel</button>
-                                        </li>`;
-            confirmList.insertAdjacentHTML('beforeend', confirmListContent);
-            listItem.remove();
-        }
-    });
-
-
-    // Confirm and Cancel button clicks
-    document.addEventListener('click', function (event) {
-        if (event.target.className === 'confirm-btn') {
-            event.target.parentNode.remove();
-            document.getElementById('next-btn').disabled = false;
-            document.getElementById('complete-img').style.visibility = 'visible';
-            document.getElementById('complete-text').textContent = 'Part is Ordered!';
-        } else if (event.target.className === 'cancel-btn') {
-            event.target.parentNode.remove();
-            document.getElementById('next-btn').disabled = false;
-        }
-    });
 }

@@ -34,7 +34,6 @@ function solve() {
         nextBtn.setAttribute('disabled', 'disabled');
         completeImageElement.style.visibility = 'hidden';
         completeTextElement.textContent = '';
-
     }
 
     function createPartInfoElement(carModel, carYear, partName, partNumber, condition) {

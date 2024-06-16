@@ -52,7 +52,8 @@ class JobOffers {
                 salary = 40000;
                 break;
         }
-        return `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $${salary} per year!`;
+        const formattedSalary = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(salary);
+        return `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of ${formattedSalary} per year!`;
     }
 
     candidatesDatabase() {
@@ -67,3 +68,15 @@ class JobOffers {
         return database.trim();
     }
 }
+
+let Jobs = new JobOffers ("Google", "Strategy Analyst");
+
+console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
+
+console.log(Jobs.jobOffer("John Doe-8"));
+
+console.log(Jobs.jobOffer("Peter Parker-4"));
+
+console.log(Jobs.salaryBonus("John Doe"));
+
+console.log(Jobs.salaryBonus("Peter Parker"));

@@ -1,0 +1,17 @@
+{
+  "name": "03.wedding-day-resources",
+  "version": "1.0.0",
+  "description": "",
+  "main": "weddingDay.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0"
+  }
+}

@@ -58,4 +58,4 @@ const lottery = {
 };
 
 
-module.exports = lottery;
+export default lottery;

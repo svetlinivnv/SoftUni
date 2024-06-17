@@ -74,8 +74,4 @@ describe('WeddingDay', () => {
             expect(() => weddingDay.tableDistribution(60, -6)).to.throw('Invalid Information!');
         });
     });
-
-
-
-
 });

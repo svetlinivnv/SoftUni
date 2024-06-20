@@ -21,7 +21,7 @@ function solve() {
             locationInput,
             creatorInput,
             specialAttributeInput
-        ]
+        ];
 
         if (inputs.some(input => input.value === '')) {
             return;
@@ -39,7 +39,7 @@ function solve() {
     function createSnowmanPreviewElement(name, height, location, creator, attribute) {
         const nameElement = document.createElement('p');
         nameElement.textContent = `Name: ${name}`;
-        
+
         const heightElement = document.createElement('p');
         heightElement.textContent = `Height: ${height}`;
 
@@ -71,7 +71,7 @@ function solve() {
         btnContainerElement.classList.add('btn-container');
         btnContainerElement.appendChild(editBtnElement);
         btnContainerElement.appendChild(nextBtnElement);
-        
+
         const snowmanInfoElement = document.createElement('li');
         snowmanInfoElement.classList.add('snowman-info');
         snowmanInfoElement.appendChild(articleElement);
@@ -86,7 +86,7 @@ function solve() {
             specialAttributeInput.value = attribute;
 
             document.querySelector('.snowman-info').remove();
-            
+
             addBtn.removeAttribute('disabled');
         });
 
@@ -100,8 +100,8 @@ function solve() {
             sendBtnElement.textContent = 'Send';
 
             snowmanContentElement.querySelector('article').appendChild(sendBtnElement);
-            snowmanContentElement.classList.add('snowman-content');
             snowmanContentElement.classList.remove('snowman-info');
+            snowmanContentElement.classList.add('snowman-content');
 
             yourSnowmanElement.appendChild(snowmanContentElement);
 

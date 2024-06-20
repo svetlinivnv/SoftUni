@@ -1,0 +1,20 @@
+{
+  "name": "03.-plan-your-trip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "planYourTrip.js",
+  "type": "module",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0"
+  }
+}

@@ -40,7 +40,6 @@ function solve() {
         });
 
         nextBtn.disabled = true;
-
     }
 
     function createVacationContentElement(firstName, lastName, fromDate, toDate) {

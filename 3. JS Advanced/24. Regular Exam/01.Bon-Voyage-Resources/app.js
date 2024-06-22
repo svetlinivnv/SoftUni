@@ -127,7 +127,3 @@ function solve() {
         return liVacationContentElement;
     }
 }
-
-
-
-

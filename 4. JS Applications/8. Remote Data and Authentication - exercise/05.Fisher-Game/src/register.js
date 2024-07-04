@@ -1,42 +1,40 @@
 function register() {
-    const REGISTER_URL = 'http://localhost:3030/users/register';
+    const REGISTER_ENDPOINT = 'http://localhost:3030/users/register';
+
+    document.getElementById('logout').style.display = 'none';
     document.querySelector('form').addEventListener('submit', onSubmit);
-    
+
     function onSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
         const email = formData.get('email');
         const password = formData.get('password');
-        const rePassword = formData.get('rePass')
+        const rePassword = formData.get('rePass');
 
         if (!email || !password || password !== rePassword) {
-            return alert('Error');
+            return alert('Incorrect data');
         }
-        
-        registerUser({ email, password });
+
+        onRegister({ email, password });
     }
 
-    async function registerUser(data) {
+    async function onRegister(data) {
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'Application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(data)
         }
-
-        const response = await fetch(REGISTER_URL, options);
-        const responseData = await response.json();
-
+        const response = await fetch(REGISTER_ENDPOINT, options);
         if (!response.ok) {
-            alert(responseData.message);
-            return;
+            return alert('Error');
         }
+        const responseData = await response.json();
 
         sessionStorage.setItem('userData', JSON.stringify(responseData));
         window.location = 'index.html';
     }
-
 }
 
 register();

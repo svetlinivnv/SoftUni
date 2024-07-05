@@ -11,7 +11,7 @@ function app() {
     const logoutBtnRef = document.querySelector('#logout');
     const welcomeUser = document.querySelector('.email span');
     const addForm = document.querySelector('form');
-    
+
     logoutBtnRef.addEventListener('click', onLogout);
     addForm.addEventListener('submit', submitCatch);
     document.querySelector('.load').addEventListener('click', loadCatches);
@@ -161,6 +161,8 @@ function app() {
     }
 
     async function onUpdate(e) {
+        checkUser();
+
         const parentDiv = e.target.parentElement;
         const inputs = Array.from(parentDiv.querySelectorAll('input'));
         const inputValuesArr = inputs.map(input => input.value);
@@ -185,6 +187,8 @@ function app() {
     }
 
     async function onDelete(e) {
+        checkUser();
+
         const id = e.target.dataset.item;
         const options = {
             method: 'DELETE',
@@ -199,6 +203,12 @@ function app() {
         }
 
         e.target.parentElement.remove();
+    }
+
+    function checkUser() {
+        if (!userData) {
+            return;
+        }
     }
 
     btnsHandler();

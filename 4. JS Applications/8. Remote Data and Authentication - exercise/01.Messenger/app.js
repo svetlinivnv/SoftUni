@@ -5,22 +5,21 @@ function attachEvents() {
     const refreshBtnRef = document.querySelector("#refresh");
     const nameInputRef = document.querySelector('input[name="author"]');
     const messageInputRef = document.querySelector('input[name="content"]');
-    const textAreaRef = document.querySelector('#messages');
+    const textAreaRef = document.querySelector("#messages");
 
     sendBtnRef.addEventListener("click", onSubmit);
-    refreshBtnRef.addEventListener('click', onRefresh);
-    
+    refreshBtnRef.addEventListener("click", onRefresh);
+
     onRefresh();
 
     async function onRefresh() {
         const response = await fetch(ENDPOINT_URL);
         if (!response.ok) {
-            return alert('Failed to fetch messages');
+            return alert("Failed to fetch messages");
         }
         const responseData = await response.json();
         const messages = Object.values(responseData);
-        let result = '';
-        console.log(messages);
+        let result = "";
         for (const message of messages) {
             result += `${message.author}: ${message.content}\n`;
         }
@@ -30,7 +29,7 @@ function attachEvents() {
 
     async function onSubmit() {
         if (!nameInputRef.value || !messageInputRef.value) {
-            return alert('Please provide name and message');
+            return alert("Please provide name and message");
         }
 
         const options = {
@@ -38,15 +37,17 @@ function attachEvents() {
             headers: {
                 "content-type": "application/json",
             },
-            body: JSON.stringify({ author: nameInputRef.value, content: messageInputRef.value })
+            body: JSON.stringify({
+                author: nameInputRef.value,
+                content: messageInputRef.value,
+            }),
         };
 
         const response = await fetch(ENDPOINT_URL, options);
         if (!response.ok) {
-            return alert('Error');
+            return alert("Error");
         }
 
-        const responseData = await response.json();
         onRefresh();
     }
 }

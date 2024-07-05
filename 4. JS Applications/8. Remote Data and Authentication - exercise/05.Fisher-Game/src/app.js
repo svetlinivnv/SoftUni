@@ -11,6 +11,7 @@ function app() {
     const logoutBtnRef = document.querySelector('#logout');
     const welcomeUser = document.querySelector('.email span');
     const addForm = document.querySelector('form');
+    
     logoutBtnRef.addEventListener('click', onLogout);
     addForm.addEventListener('submit', submitCatch);
     document.querySelector('.load').addEventListener('click', loadCatches);
